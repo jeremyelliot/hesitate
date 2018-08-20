@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>input:hesitation Event</title>
+  <script type="module">
+import Hesitate from './hesitation.js';
+/* this function is used to add items to one of the lists
+  of potential lookup request */
+const addListItem = (event) => {
+  let inputElement = event.target,
+    listItem = document.createElement('LI');
+  listItem.appendChild(document.createTextNode(inputElement.value))
+  inputElement.parentNode.querySelector('ol.queries').append(listItem)
+}
+
+let demoInputElement = document.querySelector('.demo-lookup-example input')
+let standardInputElement = document.querySelector('.standard-lookup-example input')
+
+Hesitate.addTo(demoInputElement, {wait: 300, checkValidity: true})
+
+standardInputElement.addEventListener('input', addListItem)
+demoInputElement.addEventListener('input:hesitation', addListItem)
+
+// for debugging...
+window.globalised = [standardInputElement, demoInputElement, Hesitate]
+
+  </script>
+  <style media="screen">
+    .comparison {
+      display: flex;
+      flex-direction: row;
+    }
+    .comparison>div {
+      margin: 2em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="comparison side-by-side">
+    <div class="standard-lookup-example">
+      <h2>on('input')</h2>
+      <input type="text" name="input1" value="" required pattern=".{3,}">
+      <!-- <input type="range" name="input1" min="0" max="300" value="150"> -->
+      <ol class="queries">
+      </ol>
+    </div>
+    <div class="demo-lookup-example">
+      <h2>on('input:hesitation')</h2>
+      <input type="text" name="input2" value="" required pattern=".{3,}">
+      <!-- <input type="range" name="input1" min="0" max="300" value="150"> -->
+      <ol class="queries">
+      </ol>
+    </div>
+  </div>
+</body>
+
+</html>

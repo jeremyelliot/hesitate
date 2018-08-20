@@ -1,0 +1,20 @@
+{
+  "name": "@openweb/hesitation",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "util",
+    "functional",
+    "client",
+    "browser"
+  ],
+  "author": "jeremyelliot@gmail.com",
+  "contributors": [],
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-watch": "^5.0.1"
+  }
+}
