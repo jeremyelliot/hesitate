@@ -4,9 +4,8 @@
   "license": "MIT",
   "keywords": [
     "javascript",
-    "util",
-    "functional",
-    "client",
+    "dom",
+    "event",
     "browser"
   ],
   "author": "jeremyelliot@gmail.com",

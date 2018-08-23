@@ -5,57 +5,48 @@
   <meta charset="utf-8">
   <title>input:hesitation Event</title>
   <script type="module">
-import Hesitate from './hesitation.js';
-/* this function is used to add items to one of the lists
-  of potential lookup request */
-const addListItem = (event) => {
-  let inputElement = event.target,
-    listItem = document.createElement('LI');
-  listItem.appendChild(document.createTextNode(inputElement.value))
-  inputElement.parentNode.querySelector('ol.queries').append(listItem)
-}
+    import Hesitation from './hesitation.js';
 
-let demoInputElement = document.querySelector('.demo-lookup-example input')
-let standardInputElement = document.querySelector('.standard-lookup-example input')
+    /* this function is used to add items to one of the lists of event values */
+    const addListItem = (event) => {
+      let inputElement = event.target, listItem = document.createElement('LI');
+      listItem.appendChild(document.createTextNode(inputElement.value))
+      document.querySelector((
+        event.type === 'input:hesitation' ? 'ol.hesitation-results' : 'ol.input-results'
+      )).append(listItem)
+    }
 
-Hesitate.addTo(demoInputElement, {wait: 300, checkValidity: true})
+    Hesitation.addTo(document.querySelectorAll('.input-hesitation'), { wait: 300, checkValidity: true })
 
-standardInputElement.addEventListener('input', addListItem)
-demoInputElement.addEventListener('input:hesitation', addListItem)
-
-// for debugging...
-window.globalised = [standardInputElement, demoInputElement, Hesitate]
+    for (let inputElement of document.querySelectorAll('.input-hesitation')) {
+      inputElement.addEventListener('input', addListItem)
+      inputElement.addEventListener('input:hesitation', addListItem)
+    }
 
   </script>
-  <style media="screen">
-    .comparison {
-      display: flex;
-      flex-direction: row;
-    }
-    .comparison>div {
-      margin: 2em;
-    }
-  </style>
+  <link type="text/css" rel="stylesheet" media="screen" href="style.css" />
 </head>
-
 <body>
-
-  <div class="comparison side-by-side">
+  <div class="comparison">
     <div class="standard-lookup-example">
-      <h2>on('input')</h2>
-      <input type="text" name="input1" value="" required pattern=".{3,}">
-      <!-- <input type="range" name="input1" min="0" max="300" value="150"> -->
-      <ol class="queries">
-      </ol>
+      <h2>Form elements</h2>
+      <div class="form-elements">
+        <input class="input-hesitation" type="text" placeholder="search&hellip;" name="text" value="" required pattern=".{3,}" />
+        <input class="input-hesitation" type="range" name="range" min="0" max="300" value="100" />
+        <input class="input-hesitation" type="email" placeholder="you@example.com" name="email" required/>
+        <input class="input-hesitation" type="number" placeholder="4 <= n <= 12" min="4" max="12" required/>
+        <textarea class="input-hesitation" rows="4" placeholder="Your text here&hellip;" required pattern=".{3,}"></textarea>
+      </div>
     </div>
-    <div class="demo-lookup-example">
-      <h2>on('input:hesitation')</h2>
-      <input type="text" name="input2" value="" required pattern=".{3,}">
-      <!-- <input type="range" name="input1" min="0" max="300" value="150"> -->
-      <ol class="queries">
-      </ol>
+    <div>
+      <h2>on 'input'</h2>
+      <ol class="input-results">
+        <ol>
+    </div>
+    <div>
+      <h2>on 'input:hesitation'</h2>
+      <ol class="hesitation-results"></ol>
     </div>
   </div>
 </body>
-
 </html>

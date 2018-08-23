@@ -1,0 +1,15 @@
+.comparison {
+  display: flex;
+  flex-direction: row;
+}
+.form-elements {
+  display: flex;
+  flex-direction: column;
+}
+.form-elements > * {
+  margin: 1em;
+  padding: .25em;
+}
+.comparison > div {
+  margin: 2em;
+}

@@ -14,12 +14,13 @@ const gulp = require('gulp'),
   };
 
 gulp.task('js', function() {
-  return
-  gulp.src('src/*.js')
+  return gulp.src('src/*.js')
     .pipe(eslint(eslintOptions))
     .pipe(eslint.format())
     .pipe(uglify())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./demo/'))
+    ;
 });
 
 gulp.task('default', ['js']);

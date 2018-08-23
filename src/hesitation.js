@@ -24,6 +24,13 @@ export default class Hesitation {
    *  Adds an event dispatcher to an input element
    */
   static addTo(inputElement, options) {
+    /* if we get a collection of inputElements, addTo them all */
+    if (typeof inputElement.length !== 'undefined') {
+      for (let singleInput of inputElement) {
+        Hesitation.addTo(singleInput, options)
+      }
+      return
+    }
     /* remove previously added listener if it exists */
     Hesitation.removeFrom(inputElement)
     const settings = Object.assign({}, defaults, options)
